@@ -1,0 +1,13 @@
+<h4 class="list-group-item-heading">{{name}}</h4>
+
+<p class="list-group-item-text">{{description}}</p>
+
+<div class="player-container">
+  {{video-stack
+    videos=videos
+    onHoverCallback=(action 'doNothing')
+    onSelectedCallback=(action 'doNothing')
+    modelIdentifier=modelIdentifier
+    isMuted=muted
+  }}
+</div>

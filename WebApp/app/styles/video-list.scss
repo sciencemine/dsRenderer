@@ -1,0 +1,48 @@
+/* Video Select CSS */
+.video-list {
+  position: absolute;
+
+  right: 0px;
+  left: 0px;
+  top: calc(50% + 28px);
+
+  z-index: 50;
+}
+
+.video-list--flex {
+  padding: 0px;
+  margin: 0px 5px 0px 5px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-around;
+
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.video-list--flex:focus {
+  outline: 0;
+}
+
+.video-list-item--flex {
+  align-self: auto;
+}
+
+.video-list-item--flex__small {
+  flex-basis: 10%;
+}
+
+.video-list-item--selected {
+  flex-basis: 20%;
+
+  border-radius: 5px;
+}
+
+.video-list-item--selected:hover {
+  cursor: pointer;
+}
+
+/* Video History CSS */

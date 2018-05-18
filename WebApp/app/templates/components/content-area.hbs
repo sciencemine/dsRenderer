@@ -1,0 +1,82 @@
+{{!-- Background video that is shown at all times --}}
+<div class="video-player__background--container">
+  {{video-player
+    muted=(if displayAfterVideoList true (if displayVideoSelect true false))
+    class=(if displayMapView 'video-player__hidden' (if displayVideo 'video-player__hidden' 'video-player__darken'))
+    looping=(is-single-video modelData.backgroundVideos)
+    playing=(if displayMapView false (if displayVideo false true))
+    videoId=bgVidId
+    isTeaser=false
+    onEndedCallback=(action 'cycleBackground')
+  }}
+</div>
+
+{{!-- Full screen video --}}
+{{#if displayVideo}}
+  <div class="video-player__fullscreen">
+    {{video-player
+      tagId="fullscreen-video"
+      playing=videoPlaying
+      muted=false
+      startingTime=playingVidStartTime
+      isTeaser=false
+      videoId=playingVidId
+      onClickCallback=(action 'pauseVideo' bubbles=false)
+      onHoverCallback=(action 'doNothing')
+      onEndedCallback=(action 'videoEnded')
+    }}
+  </div>
+{{/if}}
+
+{{!-- Map view stack-list --}}
+{{#if displayMapView}}
+  <img class="bg-image" src={{concat modelData.modelIdentifier '/' modelData.backgroundImage}}>
+  {{stack-list
+    isFlex=false
+    focus=true
+    onHoverCallback=(action 'doNothing')
+    onSelectedCallback=(action 'stackSelected')
+    onCancelledCallback=(action 'doNothing')
+    onInputCallback=(action 'resetTimeout')
+    onStackChangeCallback=(action 'doNothing')
+    class="stack-list no-outline"
+    stackItemHighlight="blue-border"
+    data=modelData.mapData
+    stackItemClass="stack-list-item--flex"
+  }}
+{{/if}}
+
+{{!-- Video selection for when a stack from map view is selected --}}
+{{#if displayVideoSelect}}
+  {{video-list
+    selectedVidPos=vidSelectPos
+    class="video-list video-list--flex"
+    listItemClass="video-list-item--flex"
+    listItemSmall="video-list-item--flex__small"
+    listItemSelected="video-list-item--selected"
+    listItemHighlight="blue-border"
+    videos=vidSelectData
+    focus=true
+    onSelectedCallback=(action 'videoSelected')
+    onCancelledCallback=(action 'cancelPressed')
+    onHoverCallback=(action 'doNothing')
+    onInputCallback=(action 'resetTimeout')
+  }}
+{{/if}}
+
+{{!-- View after video is completed --}}
+{{#if displayAfterVideoList}}
+  {{after-video-list
+    data=afterVideoListData
+    onInputCallback=(action 'resetTimeout')
+    videoSelectedCallback=(action 'videoSelected' bubbles=false)
+    onCancelCallback=(action 'videoSelected' playingVidId)
+  }}
+{{/if}}
+
+{{!-- Re-positionable menu-bar --}}
+{{menu-bar
+  onClickCallback=(action 'videoSelected')
+}}
+
+{{yield}}
