@@ -1,13 +1,14 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
+import Service from '@ember/service';
+import EmberObject from '@ember/object';
 
-const modelDataStub = Ember.Service.extend({
+const modelDataStub = Service.extend({
     _data: null,
-  
+
   beforeEach() {
     this.register('service:model-data', modelDataStub);
-    this.inject.service('model-data', { as: 'modelData' });
+    this.inject('model-data', { as: 'modelData' });
   }
 });
 
@@ -16,7 +17,7 @@ moduleForComponent('video-list', 'Integration | Component | video list', {
 });
 
 test('it renders', function(assert) {
-  let data = Ember.Object.create([ "apple" ]);
+  let data = EmberObject.create([ "apple" ]);
 
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });

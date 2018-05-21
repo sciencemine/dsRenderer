@@ -23,12 +23,13 @@
  * @author Michael Fryer
  * @date 5/11/2017
  **/
-import Ember from 'ember';
+import Component from '@ember/component';
+import { inject } from '@ember/service';
 import KeyboardControls from '../mixins/keyboard-controls';
 
-export default Ember.Component.extend(KeyboardControls, {
-  modelData: Ember.inject.service(),
-  
+export default Component.extend(KeyboardControls, {
+  modelData: inject(),
+
   selectedCallback: function(selectedId) {
     this.get('onSelectedCallback') (selectedId);
   },
@@ -40,7 +41,7 @@ export default Ember.Component.extend(KeyboardControls, {
   },
   init() {
     this._super(...arguments);
-    
+
     this.set('keyboard', this.get('modelData.keyboard'));
   },
   didRender() {

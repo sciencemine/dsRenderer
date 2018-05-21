@@ -1,8 +1,11 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { inject } from '@ember/service';
+import { computed } from '@ember/object';
+import { isPresent } from '@ember/utils';
 
-export default Ember.Component.extend({
-    modelData: Ember.inject.service(),
-    
+export default Component.extend({
+    modelData: inject(),
+
     selectedVidAPos: 0,
     selectedVidBPos: 1,
     stackStyle: '',
@@ -11,7 +14,7 @@ export default Ember.Component.extend({
     showVidA: true,
     isTeaser: true,
     videos: null,
-    
+
     init() {
         this._super(...arguments);
 
@@ -29,16 +32,16 @@ export default Ember.Component.extend({
                 break;
         }
     },
-    vidA: Ember.computed('videos', 'selectedVidAPos', function() {
+    vidA: computed('videos', 'selectedVidAPos', function() {
         return this.get(`videos.${this.get('selectedVidAPos')}`);
     }),
-    vidB: Ember.computed('videos', 'selectedVidBPos', function() {
+    vidB: computed('videos', 'selectedVidBPos', function() {
         return this.get(`videos.${this.get('selectedVidBPos')}`);
     }),
-    modelIdentifier: Ember.computed('modelData.modelIdentifier', function() {
+    modelIdentifier: computed('modelData.modelIdentifier', function() {
        let modelData = this.get('modelData');
-       
-       return modelData ? modelData.modelIdentifier : ''; 
+
+       return modelData ? modelData.modelIdentifier : '';
     }),
     actions: {
         stackClicked() {
@@ -46,8 +49,8 @@ export default Ember.Component.extend({
         },
         getNextVideoA() {
             let videos = this.get('videos');
-            
-            if (Ember.isPresent(videos)) {
+
+            if (isPresent(videos)) {
                 let curArrayPos = parseInt(this.get('selectedVidAPos'));
 
                 this.setProperties({
@@ -58,8 +61,8 @@ export default Ember.Component.extend({
         },
         getNextVideoB(){
             let videos = this.get('videos');
-            
-            if (Ember.isPresent(videos)) {
+
+            if (isPresent(videos)) {
                 let curArrayPos = parseInt(this.get('selectedVidBPos'));
 
                 this.setProperties({

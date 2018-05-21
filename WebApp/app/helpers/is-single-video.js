@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import { isArray } from '@ember/array';
+import { helper } from '@ember/component/helper';
 
 export function isSingleVideo([arg]) {
-  return Ember.isArray(arg) && arg.length === 1;
+  return isArray(arg) && arg.length === 1;
 }
 
-export default Ember.Helper.helper(isSingleVideo);
+export default helper(isSingleVideo);

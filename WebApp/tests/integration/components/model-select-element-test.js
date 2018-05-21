@@ -1,6 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
+import EmberObject from '@ember/object';
 
 moduleForComponent('model-select-element', 'Integration | Component | model select element', {
   integration: true
@@ -8,7 +8,7 @@ moduleForComponent('model-select-element', 'Integration | Component | model sele
 
 test('it renders', function(assert) {
 
-  let data = Ember.Object.create({
+  let data = EmberObject.create({
     "videos": {
         "0": {
             "prettyName": "Kenny with a Rubber Band: Episode X-II - A New Hope",

@@ -1,32 +1,32 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
+import $ from 'jquery';
+import { Promise } from 'rsvp';
 
-export default Ember.Route.extend({
-  models: [ ],
-
+export default Route.extend({
   beforeModel() {
     let route = this;
 
-    return Ember.$.getJSON('modelList.json').then(data => {
+    return $.getJSON('modelList.json').then(data => {
       route.set('models', data.models);
     });
   },
   model() {
     let modelData = [];
     let models = this.get('models');
-    
+
     models.forEach(function(model) {
-      modelData.push(Ember.$.getJSON(`/models/${model}.json`));
+      modelData.push($.getJSON(`/models/${model}.json`));
     });
 
-    return Ember.RSVP.Promise.all(modelData).then(res => {
+    return Promise.all(modelData).then(res => {
       models.forEach(function(model, index) {
         res[index].fileName = model;
         res[index].backgroundVideos = [ ];
-        
+
         res[index].config.backgroundVideos.forEach(function(bgVidId) {
           let vidObj = res[index].videos[bgVidId];
           vidObj.id = bgVidId;
-          
+
           res[index].backgroundVideos.push(vidObj);
         });
       });

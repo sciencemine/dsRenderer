@@ -1,13 +1,14 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
+import Service from '@ember/service';
+import EmberObject from '@ember/object';
 
-const modelDataStub = Ember.Service.extend({
+const modelDataStub = Service.extend({
     _data: null,
-  
+
   beforeEach() {
     this.register('service:model-data', modelDataStub);
-    this.inject.service('model-data', { as: 'modelData' });
+    this.inject('model-data', { as: 'modelData' });
   }
 });
 
@@ -16,7 +17,7 @@ moduleForComponent('stack-list', 'Integration | Component | stack list', {
 });
 
 test('it renders', function(assert) {
-  let data = Ember.Object.create(
+  let data = EmberObject.create(
     [
       {
         prettyName: "History",
@@ -28,11 +29,11 @@ test('it renders', function(assert) {
       }
     ]
   );
-  
+
   this.set('baba', (actual) => {
     assert.ok(actual);
   });
-  
+
   this.set('testData', data);
 
   this.render(hbs`{{stack-list data=testData modelIdentifier='' selectedCallback=(action baba)}}`);

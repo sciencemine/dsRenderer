@@ -1,13 +1,13 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
+import EmberObject from '@ember/object';
 
 moduleForComponent('video-stack', 'Integration | Component | video stack', {
   integration: true
 });
 
 test('it renders', function(assert) {
- let data = Ember.Object.create({
+ let data = EmberObject.create({
     "videos": [
         {
             "prettyName": "Kenny with a Rubber Band: Episode X-II - A New Hope",

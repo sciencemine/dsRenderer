@@ -2,8 +2,8 @@
  * COMPONENT: after-video-list
  *
  * DESCRIPTION:
- *  Called after playback of a video has ended, 
- *  presenting related videos with varying degrees of 
+ *  Called after playback of a video has ended,
+ *  presenting related videos with varying degrees of
  *  increasing or decreasing difficulty
  *
  * PARAMETERS
@@ -42,32 +42,34 @@
  * @authors Michael Fryer, Zach Valenzuela, Alex Reid
  * @date 6/15/2017
  */
-import Ember from 'ember';
+import Component from '@ember/component';
+import { isArray } from '@ember/array';
+import { typeOf } from '@ember/utils';
 
-export default Ember.Component.extend({
+export default Component.extend({
   videoListData: null,
   stackListFocus: true,
   stackListSelectedPos: 0,
   videoListSelectedPos: -1,
-  
+
   stackListData: null,
-    
+
   mouseMove() {
     this.get('onInputCallback') ();
   },
   init() {
     this._super(...arguments);
-    
+
     let data = this.get('data');
-    
-    if (Ember.isArray(data)) {
+
+    if (isArray(data)) {
       data.forEach((attr, attrIndex) => {
         attr.videos.forEach((vid, vidIndex) => {
           if (vid.id) {
             attr.videos[vidIndex] = vid.id;
           }
         });
-        
+
         data[attrIndex] = attr;
       });
 
@@ -113,14 +115,14 @@ export default Ember.Component.extend({
     videoListSelected(vidId) {
       let attr = this.get(`data.${this.get('stackListSelectedPos')}`);
       let vidDiff = null;
-      
+
       for (let i = 0; i < attr.videos.length; i++) {
         let element = attr.videos[i];
-        
-        if (Ember.typeOf(element) === 'object') {
+
+        if (typeOf(element) === 'object') {
           if (element.id === vidId) {
             vidDiff = element.diff;
-            
+
             break;
           }
         }
@@ -130,7 +132,7 @@ export default Ember.Component.extend({
           }
         }
       }
-      
+
       this.get('videoSelectedCallback') (vidId, this.get(`stackListData.${this.get('stackListSelectedPos')}`),  vidDiff);
     },
     videoListInput() {

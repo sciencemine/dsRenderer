@@ -1,22 +1,23 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
+import Service from '@ember/service';
+import EmberObject from '@ember/object';
 
-const modelDataStub = Ember.Service.extend({
+const modelDataStub = Service.extend({
     _data: null
 });
 
 moduleForComponent('after-video-list', 'Integration | Component | after video list', {
   integration: true,
-  
+
   beforeEach() {
     this.register('service:model-data', modelDataStub);
-    this.inject.service('model-data', { as: 'modelData' });
+    this.inject('model-data', { as: 'modelData' });
   }
 });
 
 test('it renders', function(assert) {
-  let testData = Ember.Object.create(
+  let testData = EmberObject.create(
     [
       {
         prettyName: "History",
@@ -28,7 +29,7 @@ test('it renders', function(assert) {
       }
     ]
   );
-  
+
   this.set('data', testData);
 
   // Set any properties with this.set('myProperty', 'value');

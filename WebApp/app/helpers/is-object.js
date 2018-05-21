@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import { typeOf } from '@ember/utils';
+import { helper } from '@ember/component/helper';
 
 export function isObject([arg]) {
-  return Ember.typeOf(arg) === 'object';
+  return typeOf(arg) === 'object';
 }
 
-export default Ember.Helper.helper(isObject);
+export default helper(isObject);

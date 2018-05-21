@@ -9,9 +9,11 @@
  * @author Michael Fryer
  * @date 5/11/2017
  */
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
+import { isNone } from '@ember/utils';
+import { observer } from '@ember/object';
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   keyboard: null,
   focus: false,
 
@@ -28,10 +30,10 @@ export default Ember.Mixin.create({
     console.log('goNext() needs to be implemented in subcomponent', event);
   },
   updateFocus: function(param) {
-    if (Ember.isNone(this.$())) {
+    if (isNone(this.$())) {
       return;
     }
-    
+
     if (param) {
       this.$().attr('tabindex', 10);
       this.$().focus();
@@ -41,8 +43,8 @@ export default Ember.Mixin.create({
       this.$().blur();
     }
   },
-  
-  changeFocusObserver: Ember.observer('focus', function() {
+
+  changeFocusObserver: observer('focus', function() {
     this.updateFocus(this.get('focus'));
   }),
 

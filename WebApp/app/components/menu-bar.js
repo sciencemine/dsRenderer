@@ -1,9 +1,11 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { inject } from '@ember/service';
+import { isNone } from '@ember/utils';
 
-export default Ember.Component.extend({
-  modelData: Ember.inject.service(),
+export default Component.extend({
+  modelData: inject(),
 
-  displayVideos: [ ],
+  displayVideos: null,
   menuBarStyle: "",
   menuBarDirection: "",
   filterType: "All",
@@ -20,9 +22,11 @@ export default Ember.Component.extend({
   init() {
     this._super(...arguments);
 
+    this.set('displayVideos', []);
+
     let modelData = this.get('modelData');
 
-    if (Ember.isNone(modelData.get('data'))) {
+    if (isNone(modelData.get('data'))) {
       return;
     }
 

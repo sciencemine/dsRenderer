@@ -1,12 +1,15 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
+import { inject } from '@ember/service';
+import { Promise } from 'rsvp';
+import $ from 'jquery';
 
-export default Ember.Route.extend({
-  modelData: Ember.inject.service(),
-  
+export default Route.extend({
+  modelData: inject(),
+
   modelFile: null,
-  
+
   preloadData: function(modelIdentifier, fileIdentifier) {
-    return new Ember.RSVP.Promise(function(resolve, reject) {
+    return new Promise(function(resolve, reject) {
       let xhr = new XMLHttpRequest();
       let url = modelIdentifier + '/' + fileIdentifier;
 
@@ -50,7 +53,7 @@ export default Ember.Route.extend({
       blobData: []
     };
 
-    return Ember.$.getJSON(path).then((res) => {
+    return $.getJSON(path).then((res) => {
       let modelIdentifier = res.config.modelIdentifier;
 
       //gets all unique videos and makes blobs of them
@@ -63,7 +66,7 @@ export default Ember.Route.extend({
       }
 
       //after promises on blobs has been resolved
-      return Ember.RSVP.Promise.all(uniqueVids.blobData).then((data) => {
+      return Promise.all(uniqueVids.blobData).then((data) => {
         //make url of the blob and hash the uniqueVid to the url
         for (var i = 0;  i < uniqueVids.vids.length; i++) {
           uniqueVids[uniqueVids.vids[i]] = URL.createObjectURL(data[i]);
@@ -76,7 +79,7 @@ export default Ember.Route.extend({
             res.videos[video].teaser.isUrl = true;
           }
         }
-        
+
         return route.get('modelData').load(res);
       });
     }).fail(() => {

@@ -1,15 +1,20 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: "button",
   classNames: [ "list-group-item" ],
-  
+
   muted: true,
   name: "",
   description: "",
   modelIdentifier: "",
-  videos: [ ],
-  
+  videos: null,
+
+  init() {
+    this._super(...arguments);
+
+    this.set('videos', []);
+  },
   mouseEnter() {
     this.set('muted', false);
   },
@@ -18,7 +23,7 @@ export default Ember.Component.extend({
   },
   actions: {
     doNothing() {
-      
+
     }
   }
 });

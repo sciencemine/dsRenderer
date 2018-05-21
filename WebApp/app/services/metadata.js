@@ -1,12 +1,14 @@
-import Ember from 'ember';
+import Service from '@ember/service';
+import { isArray } from '@ember/array';
+import { isPresent, isBlank } from '@ember/utils';
 
-export default Ember.Service.extend({
+export default Service.extend({
   _nodes: null,
   _edges: null,
-  
+
   init() {
     this._super(...arguments);
-    
+
     this.clearData();
   },
   addNode(node = { }) {
@@ -15,16 +17,16 @@ export default Ember.Service.extend({
       prettyName: node.prettyName ? node.prettyName : null,
       length: node.length ? node.length : null,
       timeWatched: node.timeWatched ? node.timeWatched : null,
-      attributes: Ember.isArray(node.attributes) ? node.attributes : [ ]
+      attributes: isArray(node.attributes) ? node.attributes : [ ]
     });
   },
   editNode(vidId, newData = { }, index = null) {
-    if (Ember.isBlank(index)) {
+    if (isBlank(index)) {
       index = this.get('_nodes').findIndex((node) => {
         return vidId === node.id;
       });
     }
-    
+
     if (index !== -1) {
       let newDataKeys = Object.keys(newData);
 
@@ -47,14 +49,14 @@ export default Ember.Service.extend({
     // TODO
     // Ajax call to server endpoint
     // dumps data as { nodes, edges }
-    
-    if (Ember.isPresent(this.get('_nodes')) || Ember.isPresent(this.get('_edges'))) {
+
+    if (isPresent(this.get('_nodes')) || isPresent(this.get('_edges'))) {
       console.log({
         nodes: this.get('_nodes').reverse(),
         edges: this.get('_edges').reverse()
       });
     }
-    
+
     this.clearData();
   },
   clearData() {

@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import { helper } from '@ember/component/helper';
+import { htmlSafe } from '@ember/template';
 
 export function makeStackStyle([arg1, arg2]) {
-  return Ember.String.htmlSafe(`left: ${arg1}%; top: ${arg2}%;`);
+  return htmlSafe(`left: ${arg1}%; top: ${arg2}%;`);
 }
 
-export default Ember.Helper.helper(makeStackStyle);
+export default helper(makeStackStyle);
