@@ -2,13 +2,14 @@ import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 
 const Router = EmberRouter.extend({
-  location: config.locationType,
-  rootURL: config.rootURL
+    location: config.locationType,
+    rootURL: config.rootURL
 });
 
 Router.map(function() {
-  this.route('model-select');
-  this.route('signage');
+    this.route('index', { path: '/' });
+    this.route('model-select');
+    this.route('signage', { path: '/signage/:id'});
 });
 
 export default Router;

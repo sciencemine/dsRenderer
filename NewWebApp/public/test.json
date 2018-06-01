@@ -1,0 +1,62 @@
+{
+    "id": "",
+    "title": "TEST",
+    "description": "THIS IS A BIG TEST",
+    "version": "0.0.0",
+    "author": "Michael Fryer",
+    "stylesheet": "",
+    "style": {
+        "layout": {
+        },
+        "theme": {
+        }
+    },
+    "contributors": [
+        ""
+    ],
+    "background_ces": [
+        ""
+    ],
+    "background_images": [
+        "testMap.png"
+    ],
+    "ce_set": {
+        "0": {
+            "id": "0",
+            "attributes": [
+                0
+            ],
+            "relationships": [
+            ]
+        },
+        "1": {
+            "id": "1",
+            "attributes": [
+                0
+            ],
+            "relationships": [
+            ]
+        },
+        "2": {
+            "id": "2",
+            "attributes": [
+                0
+            ],
+            "relationships": [
+            ]
+        },
+        "3": {
+            "id": "3",
+            "attributes": [
+                0
+            ],
+            "relationships": [
+            ]
+        }
+    },
+    "attributes": [
+        {
+            "title": "kenny"
+        }
+    ]
+}
