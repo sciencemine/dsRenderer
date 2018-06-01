@@ -1,0 +1,7 @@
+{{yield}}
+
+{{#with (get (get ce.playlist 0) 0) as |asset|}}
+    <video>
+        <source src={{asset.url}} type={{asset.type}}>
+    </video>
+{{/with}}

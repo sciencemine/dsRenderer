@@ -1,0 +1,6 @@
+@import '_global-vars';
+
+.ce > * {
+    height: 100%;
+    border-radius: 0.5 * $grid-gap;
+}

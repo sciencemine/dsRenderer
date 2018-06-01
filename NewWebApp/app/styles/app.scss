@@ -1,3 +1,9 @@
+@import '_global-vars';
+// the other scss files that need to be transpiled
+@import 'video-select';
+@import 'ce';
+
 body {
     margin: 0px;
+    background-color: $background-color;
 }

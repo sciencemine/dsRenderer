@@ -1,0 +1,44 @@
+@import '_global-vars';
+
+.vs-container {
+    width: 100vw;
+    height: 100vh;
+
+    display: grid;
+
+    // not sure if we want to enforce this but it will help with layout for now
+    grid-gap: $grid-gap;
+
+    // testing stuff
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+
+    // there can be n number of these
+    // can only assign cells if it is a direct child of a grid element
+    // the style of the list can change. for instance might want them to be
+    //   flex (netflix view) or sub grids (tile layout)
+    & > .vs-list {
+        background-color: 0.85 * $background-color;
+
+        // for now have each list take up a full row
+        grid-column-start: 1;
+        grid-column-end: -1;
+
+        // rounded corners for my sanity
+        border-radius: 0.5 * $grid-gap;
+
+        // default behavior is displaying as flex
+        display: flex;
+        justify-content: flex-start;
+        overflow: auto;
+
+        // these are the actual items. some basic styles need to be applied
+        //   but the large part of the styles should come from imported stylesheets
+        //   using the exposed hooks
+        & > .vs-item {
+            // default stuff for flex
+            flex: 0 0 auto;
+            margin: 0.25 * $grid-gap;
+        }
+    }
+}
