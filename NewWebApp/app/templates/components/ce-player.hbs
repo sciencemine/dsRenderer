@@ -1,7 +1,19 @@
-{{yield}}
+{{!-- ce player should only care about the order things are playled not how they are played --}}
 
-{{#with (get (get ce.playlist 0) 0) as |asset|}}
-    <video>
-        <source src={{asset.url}} type={{asset.type}}>
-    </video>
-{{/with}}
+{{!-- if the concurrent asset is a track put it inside --}}
+{{#asset-player asset=(get currentItem 0)}}
+    {{#each (get currentItem 1) as |asset key|}}
+        {{#if (is-track asset.type)}}
+            {{asset-player asset=asset}}
+        {{/if}}
+    {{/each}}
+{{/asset-player}}
+
+{{!-- otherwise put it outside --}}
+{{#each (get currentItem 1) as |asset key|}}
+    {{#unless (is-track asset.type)}}
+        {{asset-player asset=asset}}
+    {{/unless}}
+{{/each}}
+
+{{yield}}

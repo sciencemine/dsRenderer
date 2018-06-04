@@ -1,3 +1,7 @@
 {{outlet}}
 
-{{video-select data=model.ce_set}}
+{{!-- {{video-select data=model.ce_set}} --}}
+
+<div style="width:1600px;height:900px">
+    {{ce-player ce=(get model.ce_set 0)}}
+</div>

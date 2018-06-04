@@ -1,0 +1,13 @@
+{
+    "id": "4",
+    "version": "0.0.0",
+    "attribution": "Kendall Schmitt",
+    "url": "/kenny/kenny_sub.vtt",
+    "type": "text/vtt",
+    "title": "Kenny Subs",
+    "options": {
+        "srclang": "en",
+        "kind": "subtitles",
+        "default": "default"
+    }
+}

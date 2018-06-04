@@ -35,7 +35,7 @@ export default Route.extend({
 
                 // replace all concurrent assets
                 assetList[1].forEach((conAsset, index) => {
-                    promises.push($.getJSON(`/assets/${ceObj.conAsset}.json`)
+                    promises.push($.getJSON(`/assets/${conAsset}.json`)
                             .then((data) => {
                                 assetList[1][index] = data;
                             })

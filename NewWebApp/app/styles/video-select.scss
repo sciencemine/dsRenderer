@@ -29,7 +29,7 @@
 
         // default behavior is displaying as flex
         display: flex;
-        justify-content: flex-start;
+        // justify-content: flex-start;
         overflow: auto;
 
         // these are the actual items. some basic styles need to be applied
@@ -39,6 +39,8 @@
             // default stuff for flex
             flex: 0 0 auto;
             margin: 0.25 * $grid-gap;
+            width: 10vw;
+            height: 100%;
         }
     }
 }
