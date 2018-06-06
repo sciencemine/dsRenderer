@@ -1,6 +1,8 @@
 <div class="vs-list">
     {{#each-in data as |index value|}}
-        {{ce-player class="vs-item" ce=value}}
+        <div class="vs-item">
+            {{ce-player ce=value}}
+        </div>
     {{/each-in}}
 </div>
 

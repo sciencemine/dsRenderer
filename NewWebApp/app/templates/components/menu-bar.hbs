@@ -1,0 +1,18 @@
+<div class="menu-bar {{if renderMenu 'expand-' 'collapse-'}}menu">
+    <div class="menu-controls">
+        Controls Stuff Here
+    </div>
+    {{!-- make the actual list --}}
+    <div class="menu-list">
+        {{#each-in dsm.ce_set as |key value|}}
+            <div class="menu-item">
+                {{ce-player ce=value}}
+            </div>
+        {{/each-in}}
+    </div>
+</div>
+<div class="menu-tag" onmouseenter={{action 'toggleMenu'}}>
+    <div></div>
+</div>
+
+{{yield}}

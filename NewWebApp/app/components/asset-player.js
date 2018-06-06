@@ -4,9 +4,9 @@ import Component from '@ember/component';
 export default Component.extend({
     classNames: [ 'asset-player' ],
     tagName: 'video',
-    isTeaser: true,
-
-    init() {
+    isTeaser: false,
+    
+    didReceiveAttrs() {
         this._super(...arguments);
 
         let asset = this.get('asset');
@@ -19,8 +19,10 @@ export default Component.extend({
                     src: asset.url,
                     type: asset.type,
                     autoplay: 'autoplay',
-                    attributeBindings: [ 'autoplay', 'src', 'type' ]
+                    attributeBindings: [ 'autoplay', 'src', 'type', 'onassetdone:onended' ]
                 });
+
+                this.set('onended', () => console.log('ba'));
             break;
             // fix if it is a sub
             case 'text/vtt':
@@ -37,6 +39,10 @@ export default Component.extend({
                     src: asset.url,
                     attributeBindings: [ 'src' ]
                 });
+                
+                if (asset.options.duration) {
+                    setTimeout(this.get('onassetdone'), asset.options.duration * 1000);
+                }
             break;
         }
 
@@ -50,7 +56,13 @@ export default Component.extend({
                 muted: 'muted',
                 loop: 'loop'
             });
+
             this.set('attributeBindings', this.get('attributeBindings').concat([ 'muted', 'loop' ]));
+        }
+    },
+    actions: {
+        test() {
+            console.log('ba')
         }
     }
 });

@@ -4,6 +4,13 @@
     "description": "THIS IS A BIG TEST",
     "version": "0.0.0",
     "author": "Michael Fryer",
+    "config": {
+        "menuLocale": "top",
+        "idle": 15,
+        "menuDwell": 3,
+        "popoverDwell": 5,
+        "popoverShowDelay": 0.2
+    },
     "stylesheet": "",
     "style": {
         "layout": {

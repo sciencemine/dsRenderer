@@ -6,5 +6,6 @@
     "type": "image/png",
     "title": "Test Map",
     "options": {
+        "duration": 5000
     }
 }
