@@ -3,7 +3,6 @@ import Component from '@ember/component';
 
 export default Component.extend({
     classNames: [ 'asset-player' ],
-    tagName: 'video',
     isTeaser: false,
     
     didReceiveAttrs() {
@@ -44,13 +43,24 @@ export default Component.extend({
                     setTimeout(this.get('onassetdone'), asset.options.duration * 1000);
                 }
             break;
+            case 'image/webp':
+                this.setProperties({
+                    tagName: 'img',
+                    src: asset.url,
+                    attributeBindings: [ 'src' ]
+                });
+
+                if (asset.options.duration) {
+                    setTimeout(this.get('onassetdone'), asset.options.duration * 1000);
+                }
+            break;
         }
 
         for (let option in asset.options) {
             this.set(option, asset.options[option]);
             this.get('attributeBindings').push(option);
         }
-
+/*
         if (this.get('isTeaser')) {
             this.setProperties({
                 muted: 'muted',
@@ -58,11 +68,6 @@ export default Component.extend({
             });
 
             this.set('attributeBindings', this.get('attributeBindings').concat([ 'muted', 'loop' ]));
-        }
-    },
-    actions: {
-        test() {
-            console.log('ba')
-        }
+        }*/
     }
 });

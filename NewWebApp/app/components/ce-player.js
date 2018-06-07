@@ -4,12 +4,13 @@ import { computed } from '@ember/object';
 export default Component.extend({
     classNames: [ 'ce-player' ],
     playlistIndex: 0,
+    isTeaser: true,
 
     init() {
         this._super(...arguments);
         
         // if the first thing in the playlist is a teaser, adjust the playlist index
-        if (!Array.isArray(this.get('ce.playlist')[0])) {
+        if (!this.get('isTeaser') && !Array.isArray(this.get('ce.playlist')[0])) {
             this.incrementProperty('playlistIndex');
         }
     },
@@ -29,6 +30,9 @@ export default Component.extend({
                     playlistOver(ce);
                 }
             }
+        },
+        teaserDone() {
+            
         }
     }
 });
