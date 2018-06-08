@@ -13,14 +13,10 @@
     },
     "stylesheet": "",
     "style": {
-        "layout": {
-        },
-        "theme": {
-        }
+        "layout": { },
+        "theme": { }
     },
-    "contributors": [
-        ""
-    ],
+    "contributors": [ ],
     "idle_backgrounds": [
         "0", "1"
     ],

@@ -52,7 +52,7 @@ export default Route.extend({
             Promise.all(Object.keys(dsm.ce_set).map((ce) => {
                 return named(dsm.ce_set[ce]);
             })),
-            Promise.all(dsm.idle_backgrounds.map((ce, index, arr) => {
+            Promise.all(dsm.idle_backgrounds.map((ce, index) => {
                 return named(dsm.idle_backgrounds[index]);
             }))
         ])

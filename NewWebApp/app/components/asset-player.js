@@ -23,6 +23,18 @@ export default Component.extend({
 
                 this.set('onended', () => console.log('ba'));
             break;
+            // fix if it is a video
+            case 'video/mp4':
+                this.setProperties({
+                    tagName: 'video',
+                    src: asset.url,
+                    type: asset.type,
+                    autoplay: 'autoplay',
+                    attributeBindings: [ 'autoplay', 'src', 'type', 'onassetdone:onended' ]
+                });
+
+                this.set('onended', () => console.log('ba'));
+            break;
             // fix if it is a sub
             case 'text/vtt':
                 this.setProperties({
