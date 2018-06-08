@@ -60,14 +60,5 @@ export default Component.extend({
             this.set(option, asset.options[option]);
             this.get('attributeBindings').push(option);
         }
-/*
-        if (this.get('isTeaser')) {
-            this.setProperties({
-                muted: 'muted',
-                loop: 'loop'
-            });
-
-            this.set('attributeBindings', this.get('attributeBindings').concat([ 'muted', 'loop' ]));
-        }*/
     }
 });

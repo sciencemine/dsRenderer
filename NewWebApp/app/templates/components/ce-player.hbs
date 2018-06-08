@@ -4,12 +4,12 @@
     {{asset-player asset=currentItem}}
 {{else}}
     {{#with (get currentItem 0) as |primaryAsset|}}
-{{!-- note that we only care if the primary asset id done --}}
+        {{!-- note that we only care if the primary asset id done --}}
         {{#asset-player
             asset=primaryAsset
             onassetdone=(action 'assetDone' primaryAsset)
         }}
-{{!-- if the concurrent asset is a track put it inside --}}
+            {{!-- if the concurrent asset is a track put it inside --}}
             {{#each (get currentItem 1) as |asset key|}}
                 {{#if (is-track asset.type)}}
                     {{asset-player asset=asset}}

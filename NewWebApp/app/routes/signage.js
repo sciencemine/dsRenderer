@@ -6,16 +6,15 @@ export default Route.extend({
     // this is only necessary when testing from public files. the server will
     //   include the appropriate asset info when requesting a ce
     resolveAssets(dsm) {
-        return Promise.all(Object.keys(dsm.ce_set).map((ce) => {
-            let ceObj = dsm.ce_set[ce],
-                    promises = [],
+        function named(ce) {
+            let promises = [],
                     hasTeaser = false;
 
             // if the playlist has a teaser query for it
-            if (!Array.isArray(ceObj.playlist[0])) {
-                promises.push($.getJSON(`/assets/${ceObj.playlist[0]}.json`)
+            if (!Array.isArray(ce.playlist[0])) {
+                promises.push($.getJSON(`/assets/${ce.playlist[0]}.json`)
                         .then((data) => {
-                            ceObj.playlist[0] = data;
+                            ce.playlist[0] = data;
                         })
                         .catch(console.error));
 
@@ -23,8 +22,8 @@ export default Route.extend({
             }
 
             // replace all assets in the playlist
-            for (let i = (hasTeaser ? 1 : 0); i < ceObj.playlist.length; i++) {
-                let assetList = ceObj.playlist[i]
+            for (let i = (hasTeaser ? 1 : 0); i < ce.playlist.length; i++) {
+                let assetList = ce.playlist[i]
 
                 // push the query for the primary asset of this sequence into the set
                 promises.push($.getJSON(`/assets/${assetList[0]}.json`)
@@ -44,13 +43,19 @@ export default Route.extend({
             }
 
             return Promise.all(promises)
-            .then(() => {
-                dsm.ce_set[ce] = ceObj;
-            })
             .catch(() => {
                 this.transitionTo('model-select');
             });
-        }))
+        }
+
+        return Promise.all([
+            Promise.all(Object.keys(dsm.ce_set).map((ce) => {
+                return named(dsm.ce_set[ce]);
+            })),
+            Promise.all(dsm.idle_backgrounds.map((ce, index, arr) => {
+                return named(dsm.idle_backgrounds[index]);
+            }))
+        ])
         .then(() => {
             return dsm;
         })
@@ -59,24 +64,33 @@ export default Route.extend({
         });
     },
     resolveCEs(dsm) {
-        return Promise.all(Object.keys(dsm.ce_set).map((ce) => {
-            return $.getJSON(`/ces/${ce}.json`)
-            .then((data) => {
-                data.attributes = dsm.ce_set[ce].attributes;
-                data.relations = dsm.ce_set[ce].relations;
-                dsm.ce_set[ce] = data;
-
-            })
-            .catch(() => {
-                return $.getJSON(`${this.cdnAPI}/ce/${ce}`)
+        return Promise.all([
+            Promise.all(Object.keys(dsm.ce_set).map((ce) => {
+                return $.getJSON(`/ces/${ce}.json`)
                 .then((data) => {
                     data.attributes = dsm.ce_set[ce].attributes;
                     data.relations = dsm.ce_set[ce].relations;
                     dsm.ce_set[ce] = data;
+
+                })
+                .catch(() => {
+                    return $.getJSON(`${this.cdnAPI}/ce/${ce}`)
+                    .then((data) => {
+                        data.attributes = dsm.ce_set[ce].attributes;
+                        data.relations = dsm.ce_set[ce].relations;
+                        dsm.ce_set[ce] = data;
+                    })
+                    .catch(console.error);
+                });
+            })),
+            Promise.all(dsm.idle_backgrounds.map((ce, index, arr) => {
+                return $.getJSON(`/ces/${ce}.json`)
+                .then((data) => {
+                    arr[index] = data;
                 })
                 .catch(console.error);
-            });
-        }))
+            }))
+        ])
         .then(() => {
             return dsm;
         })

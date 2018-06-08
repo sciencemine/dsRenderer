@@ -22,7 +22,7 @@
         ""
     ],
     "idle_backgrounds": [
-        ""
+        "0", "1"
     ],
     "video_select_backgrounds": [
         "testMap.png"

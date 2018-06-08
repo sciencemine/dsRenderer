@@ -34,5 +34,10 @@ export default Mixin.create({
         this.set('_playlist', playlist);
         // since currentItem is volatile we have to notify ofthe property change
         this.notifyPropertyChange('currentItem');
+    },
+    setPlaylistIndex(playlistIndex = 0) {
+        this.set('_playlistIndex', playlistIndex);
+        // since currentItem is volatile we have to notify ofthe property change
+        this.notifyPropertyChange('currentItem');
     }
 });
