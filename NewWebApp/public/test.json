@@ -21,10 +21,10 @@
     "contributors": [
         ""
     ],
-    "background_ces": [
+    "idle_backgrounds": [
         ""
     ],
-    "background_images": [
+    "video_select_backgrounds": [
         "testMap.png"
     ],
     "ce_set": {
