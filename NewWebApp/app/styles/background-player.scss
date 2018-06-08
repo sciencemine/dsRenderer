@@ -1,24 +1,16 @@
-.background-player {
-    position: absolute;
+@import '_global-vars';
 
-    top: 0;
-    left: 0;
+.background-player {
+    @include fullscreen();
 
     z-index: -100;
-
-    width: 100vw;
-    height: 100vh;
 
     pointer-events: none;
 
     & > .overlay {
         background-color: black;
-
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        
+        @include fullscreen();
 
         opacity: 0.30;
 

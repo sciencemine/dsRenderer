@@ -2,12 +2,7 @@
 
 .vs-container {
     // Needs to be full screen
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    width: 100vw;
-    height: 100vh;
+    @include fullscreen();
 
     display: grid;
 
