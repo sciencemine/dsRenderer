@@ -37,74 +37,78 @@
   pointer-events: none;
 
   // Nested classes
-  .menu-bar {
-    // necessary because firefox is dumb
-    width: inherit;
-    max-height: $menu-max-height;
+  .menu-bar-container {
+    width: inherit; 
 
-    grid-column: left / -1;
-    grid-row-start: top;
+    .menu-bar {
+      // necessary because firefox is dumb
+      width: inherit;
+      max-height: $menu-max-height;
 
-    border-bottom-right-radius: 0.5em;
-    border-bottom-left-radius: 0.5em;
-    
-    pointer-events: auto;
-    background-color: #c0c1c4;
+      grid-column: left / -1;
+      grid-row-start: top;
 
-    display: flex;
+      border-bottom-right-radius: 0.5em;
+      border-bottom-left-radius: 0.5em;
+      
+      pointer-events: auto;
+      background-color: #c0c1c4;
 
-    overflow: hidden;
-
-    & > .menu-controls {
-      padding: 1em;
-    }
-
-    & > .menu-list {
       display: flex;
-      overflow: auto;
-      justify-content: flex-start;
 
-      & > .menu-item {
-        flex: 0 0 auto;
-        margin: 1em;
+      overflow: hidden;
 
-        width: $menu-item-width;
-        height: $menu-item-width * (9 / 16);
+      & > .menu-controls {
+        padding: 1em;
+      }
 
-        cursor: pointer;
+      & > .menu-list {
+        display: flex;
+        overflow: auto;
+        justify-content: flex-start;
+
+        & > .menu-item {
+          flex: 0 0 auto;
+          margin: 1em;
+
+          width: $menu-item-width;
+          height: $menu-item-width * (9 / 16);
+
+          cursor: pointer;
+        }
       }
     }
-  }
-  
-  .collapse-menu {
-    @include animate(collapse-horizontal);
-  }
+    
+    .collapse-menu {
+      @include animate(collapse-horizontal);
+    }
 
-  .expand-menu {
-    @include animate(expand-horizontal);
-  }
+    .expand-menu {
+      @include animate(expand-horizontal);
+    }
 
-  .menu-tag {
-    $tag-width: 5vw;
+    .menu-tag {
+      $tag-width: 5vw;
 
-    display: flex;
-    justify-content: space-around;
-    pointer-events: auto;
+      display: flex;
+      justify-content: space-around;
+      pointer-events: auto;
 
-    grid-row-start: top-menu;
-    grid-column: left / -1;
+      grid-row-start: top-menu;
+      grid-column: left / -1;
 
-    & > * {
-      $double-tag-width: 2 * $tag-width;
+      & > * {
+        $double-tag-width: 2 * $tag-width;
 
-      opacity: 0.85;
-      background-color: #666;
+        opacity: 0.85;
+        background-color: #666;
 
-      height: $menu-collapse-height;
-      width: $tag-width;
+        height: $menu-collapse-height;
+        width: $tag-width;
 
-      border-bottom-right-radius: $double-tag-width;
-      border-bottom-left-radius: $double-tag-width;
+        border-bottom-right-radius: $double-tag-width;
+        border-bottom-left-radius: $double-tag-width;
+      }
     }
   }
 }

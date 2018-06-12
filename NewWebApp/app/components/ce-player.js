@@ -10,7 +10,7 @@ export default Component.extend(PlaylistHandler, {
         this.setPlaylistIndex();
 
         // if the first thing in the playlist is a teaser, adjust the playlist index
-        if (!Array.isArray(this.get('currentItem'))) {
+        if (!this.get('isTeaser') && !Array.isArray(this.get('currentItem'))) {
             this.incrementPlaylist();
         }
     },

@@ -1,52 +1,14 @@
 import Component from '@ember/component';
-import { isNone } from '@ember/utils';
 
 export default Component.extend({
-    classNames: [ 'menu-overlay' ],
-
-    menuBarStyle: '',
-    menuBarDirection: '',
+    classNames: [ 'menu-bar-container' ],
     renderMenu: true,
     menuTimeout: null,
     
     init() {
         this._super(...arguments);
 
-        let dsm = this.get('dsm');
-
-        if (isNone(dsm)) {
-            return;
-        }
-
-        switch (dsm.config.menuLocale) {
-            case "right":
-                this.setProperties({
-                    menuBarStyle: 'menu-right',
-                    menuBarDirection: 'vertical'
-                });
-            break;
-            case "bottom":
-                    this.setProperties({
-                    menuBarStyle: 'menu-bottom',
-                    menuBarDirection: 'horizontal',
-                    // useDropUp: true
-                });
-            break;
-            case "left":
-                this.setProperties({
-                    menuBarStyle: 'menu-left',
-                    menuBarDirection: 'vertical'
-                });
-            break;
-            default:
-                this.setProperties({
-                    menuBarStyle: 'menu-top',
-                    menuBarDirection: 'horizontal'
-                });
-            break;
-        }
-
-        this.mouseLeave();
+        // this.mouseLeave();
     },
     mouseEnter() {
         this.set('renderMenu', true);
@@ -60,6 +22,8 @@ export default Component.extend({
             // hide pop overs
             component.set('renderMenu', false);
         }, this.get('dsm.config.menuDwell') * 1000, this)
+
+        this.set('menuTimeout', timeout);
     },
     actions: {
         ceSelected(ceID) {
@@ -69,7 +33,7 @@ export default Component.extend({
                 callback(ceID);
             }
         },
-        toggleMenu() {
+        openMenu() {
             this.mouseEnter();
         }
     }
