@@ -1,29 +1,27 @@
 {{!-- ce player should only care about the order things are playled not how they are played --}}
 
 {{#if isTeaser}}
-    {{asset-player asset=currentItem}}
+    {{asset-middleware asset=currentItem}}
 {{else}}
     {{#with (get currentItem 0) as |primaryAsset|}}
         {{!-- note that we only care if the primary asset id done --}}
-        {{#asset-player
+        {{#asset-middleware
             asset=primaryAsset
             onassetdone=(action 'assetDone' primaryAsset)
         }}
             {{!-- if the concurrent asset is a track put it inside --}}
             {{#each (get currentItem 1) as |asset key|}}
                 {{#if (is-track asset.type)}}
-                    {{asset-player asset=asset}}
+                    {{asset-middleware asset=asset}}
                 {{/if}}
             {{/each}}
-        {{/asset-player}}
+        {{/asset-middleware}}
     {{/with}}
 
     {{!-- otherwise put it outside --}}
     {{#each (get currentItem 1) as |asset key|}}
         {{#unless (is-track asset.type)}}
-            {{asset-player asset=asset}}
+            {{asset-middleware asset=asset}}
         {{/unless}}
     {{/each}}
 {{/if}}
-
-{{yield}}

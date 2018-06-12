@@ -1,0 +1,13 @@
+{{#if (test-eq (determine-player asset.type) "video")}}
+    {{#video-asset-player asset=asset onassetdone=onassetdone}}
+        {{yield}}
+    {{/video-asset-player}}
+{{else if (test-eq (determine-player asset.type) "image")}}
+    {{#image-asset-player asset=asset onassetdone=onassetdone}}
+        {{yield}}
+    {{/image-asset-player}}
+{{else if (test-eq (determine-player asset.type) "text")}}
+    {{#text-asset-player asset=asset onassetdone=onassetdone}}
+        {{yield}}
+    {{/text-asset-player}}
+{{/if}}
