@@ -12,6 +12,8 @@
         
         @include fullscreen();
 
+        pointer-events: none;
+
         opacity: 0.30;
 
         z-index: 100;

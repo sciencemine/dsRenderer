@@ -2,11 +2,11 @@
 
 .menu-overlay {
   // variables
-  $menu-max-width: 25vw;
-  $menu-max-height: 25vh;
+  $menu-max-width: 50vw;
+  $menu-max-height: 50vh;
   $menu-collapse-height: 2vh;
   $menu-collapse-width: 1vw;
-  $menu-item-width: 20vw;
+  $menu-item-width: 10vw;
 
   @mixin animate($name, $timing: ease) {
     animation-name: $name;
@@ -48,8 +48,8 @@
       grid-column: left / -1;
       grid-row-start: top;
 
-      border-bottom-right-radius: 0.5em;
-      border-bottom-left-radius: 0.5em;
+      border-bottom-right-radius: 0.5 * $grid-gap;
+      border-bottom-left-radius: 0.5 * $grid-gap;
       
       pointer-events: auto;
       background-color: #c0c1c4;
@@ -59,17 +59,18 @@
       overflow: hidden;
 
       & > .menu-controls {
-        padding: 1em;
+        padding: 1 * $grid-gap;
       }
 
       & > .menu-list {
         display: flex;
-        overflow: auto;
+        overflow-x: auto;
+        overflow-y: hidden;
         justify-content: flex-start;
 
         & > .menu-item {
           flex: 0 0 auto;
-          margin: 1em;
+          margin: 1 * $grid-gap;
 
           width: $menu-item-width;
           height: $menu-item-width * (9 / 16);
