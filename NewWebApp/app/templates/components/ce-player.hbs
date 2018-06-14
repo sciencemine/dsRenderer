@@ -7,6 +7,8 @@
         {{#asset-middleware
             asset=primaryAsset
             onassetdone=(action 'assetDone' primaryAsset)
+            onpause=onpause
+            onplay=onplay
         }}
             {{!-- if the concurrent asset is a track put it inside --}}
             {{#each (get currentItem 1) as |asset key|}}

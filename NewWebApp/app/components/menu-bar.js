@@ -8,7 +8,7 @@ export default Component.extend({
     init() {
         this._super(...arguments);
 
-        // this.mouseLeave();
+        this.mouseLeave();
     },
     mouseEnter() {
         this.set('renderMenu', true);
@@ -26,13 +26,6 @@ export default Component.extend({
         this.set('menuTimeout', timeout);
     },
     actions: {
-        ceSelected(ceID) {
-            let callback = this.get('onClickCallback');
-
-            if (callback) {
-                callback(ceID);
-            }
-        },
         openMenu() {
             this.mouseEnter();
         }

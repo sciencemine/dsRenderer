@@ -1,11 +1,18 @@
-{{outlet}}
-
-{{!-- {{video-select data=model.ce_set}} --}}
-
+{{#if renderCeSelect}}
+    {{ce-select dwell=model.config.idle data=ceSelectItems
+            onceselect=(action 'ceSelected')
+            ontimeout=(action 'ceSelectTimeout')}}
+{{/if}}
+{{!-- menu overlay should always render. want to make whole thing into
+        a component at some point but not atm --}}
 <div class="menu-overlay">
-    {{menu-bar dsm=model}}
+    {{menu-bar dsm=model onceselect=(action 'ceSelected')}}
 </div>
+{{!-- the bg player should pause when the fg player is playing --}}
+{{#if renderFgPlayer}}
+    {{fg-player ce=fgCe oncedone=(action 'ceDone') onpause=(action 'fgPause')
+        onplay=(action 'fgPlay')}}
+{{/if}}
 
-{{bg-player playlist=model.idle_backgrounds}}
-
-{{!-- {{fs-player ce=(get model.ce_set 0)}} --}}
+{{bg-player class=(if renderFgPlayer "hidden")
+        playlist=bgPlayerItems onmousemove=(action 'wake')}}

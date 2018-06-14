@@ -36,6 +36,8 @@
 
   pointer-events: none;
 
+  z-index: 1000;
+
   // Nested classes
   .menu-bar-container {
     width: inherit; 
@@ -57,6 +59,8 @@
       display: flex;
 
       overflow: hidden;
+      
+      box-shadow: 0 (0.5 * $grid-gap) $grid-gap black;
 
       & > .menu-controls {
         padding: 1 * $grid-gap;

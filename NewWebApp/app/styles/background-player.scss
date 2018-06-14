@@ -5,17 +5,12 @@
 
     z-index: -100;
 
-    pointer-events: none;
-
     & > .overlay {
-        background-color: black;
-        
         @include fullscreen();
 
-        pointer-events: none;
-
+        background-color: black;
         opacity: 0.30;
-
-        z-index: 100;
+        z-index: -50;
+        pointer-events: none;
     }
 }

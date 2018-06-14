@@ -2,6 +2,12 @@ import AssetPlayer from './asset-player';
 
 export default AssetPlayer.extend({
     tagName: 'video',
+    controls: true,
+    autoplay: true,
+
+    onassetdone() { },
+    onpause() { },
+    onplay() { },
     
     didReceiveAttrs() {
         let asset = this.get('asset');
@@ -9,10 +15,18 @@ export default AssetPlayer.extend({
         this.setProperties({
             src: asset.url,
             type: asset.type,
-            autoplay: 'autoplay',
-            attributeBindings: [ 'autoplay', 'src', 'type', 'onassetdone:onended' ]
+            attributeBindings: [ 'controls', 'autoplay', 'src', 'type',
+                    'onassetdone:onended', 'onpause:onpause', 'onplay:onplay' ]
         });
 
         this.bindOptions();
+    },
+    click(e) {
+        if (e.target.paused) {
+            e.target.play();
+        }
+        else {
+            e.target.pause();
+        }
     }
 });

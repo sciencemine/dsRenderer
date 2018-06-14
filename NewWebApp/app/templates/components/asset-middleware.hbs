@@ -1,5 +1,6 @@
 {{#if (test-eq (determine-player asset.type) "video")}}
-    {{#video-asset-player asset=asset onassetdone=onassetdone}}
+    {{#video-asset-player asset=asset onassetdone=onassetdone
+            onpause=onpause onplay=onplay}}
         {{yield}}
     {{/video-asset-player}}
 {{else if (test-eq (determine-player asset.type) "image")}}
