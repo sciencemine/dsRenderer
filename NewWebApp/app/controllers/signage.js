@@ -24,7 +24,9 @@ export default Controller.extend({
     }),
     // this is the ce to be rendered in the fg player
     fgCe: null,
-
+    // this is for if te fg is playing the video or not. needed for knowing
+    //   whether to play the bg videos or not
+    playBg: true,
     init() {
         this._super(...arguments);
         
@@ -40,7 +42,8 @@ export default Controller.extend({
             this.setProperties({
                 fgCe: ce,
                 renderFgPlayer: true,
-                renderCeSelect: false
+                renderCeSelect: false,
+                playBg: false
             });
         },
         // this handles the callback when the fg player is done playing
@@ -49,7 +52,8 @@ export default Controller.extend({
                 fgCe: null,
                 renderFgPlayer: false,
                 renderCeSelect: true,
-                ceSelectItems: this.get('model.ce_set')
+                ceSelectItems: this.get('model.ce_set'),
+                playBg: true
             });
         },
         // this handles updating the state when the ce select times out
@@ -79,7 +83,8 @@ export default Controller.extend({
         fgPlay() {
             this.setProperties({
                 renderCeSelect: false,
-                ceSelectItems: A()
+                ceSelectItems: A(),
+                playBg: false
             });
         }
     }

@@ -14,5 +14,5 @@
         onplay=(action 'fgPlay')}}
 {{/if}}
 
-{{bg-player class=(if renderFgPlayer "hidden")
+{{bg-player class=(if renderFgPlayer "hidden") playBg=playBg
         playlist=bgPlayerItems onmousemove=(action 'wake')}}

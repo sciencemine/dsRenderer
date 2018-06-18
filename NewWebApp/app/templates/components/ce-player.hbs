@@ -9,6 +9,7 @@
             onassetdone=(action 'assetDone' primaryAsset)
             onpause=onpause
             onplay=onplay
+            playing=playing
         }}
             {{!-- if the concurrent asset is a track put it inside --}}
             {{#each (get currentItem 1) as |asset key|}}
