@@ -4,12 +4,12 @@
 {{else}}
     {{#with (get currentItem 0) as |primaryAsset|}}
         {{!-- note that we only care if the primary asset id done --}}
+        {{!-- Only care about options and callbacks on the primary asset --}}
         {{#asset-middleware
             asset=primaryAsset
             onassetdone=(action 'assetDone' primaryAsset)
-            onpause=onpause
-            onplay=onplay
-            playing=playing
+            options=options
+            callbacks=callbacks
         }}
             {{!-- if the concurrent asset is a track put it inside --}}
             {{#each (get currentItem 1) as |asset key|}}

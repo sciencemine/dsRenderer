@@ -1,14 +1,16 @@
 {{#if (test-eq (determine-player asset.type) "video")}}
     {{#video-asset-player asset=asset onassetdone=onassetdone
-            onpause=onpause onplay=onplay playing=playing}}
+            options=options callbacks=callbacks}}
         {{yield}}
     {{/video-asset-player}}
 {{else if (test-eq (determine-player asset.type) "image")}}
-    {{#image-asset-player asset=asset onassetdone=onassetdone}}
+    {{#image-asset-player asset=asset onassetdone=onassetdone
+            options=options callbacks=callbacks}}
         {{yield}}
     {{/image-asset-player}}
 {{else if (test-eq (determine-player asset.type) "text")}}
-    {{#text-asset-player asset=asset onassetdone=onassetdone}}
+    {{#text-asset-player asset=asset onassetdone=onassetdone
+            options=options callbacks=callbacks}}
         {{yield}}
     {{/text-asset-player}}
 {{/if}}

@@ -59,7 +59,10 @@ export default Controller.extend({
         // this handles updating the state when the ce select times out
         ceSelectTimeout() {
             this.setProperties({
+                fgCe: null,
+                renderFgPlayer: false,
                 renderCeSelect: false,
+                playBg: true,
                 ceSelectItems: A()
             });
         },
