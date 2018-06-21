@@ -17,6 +17,11 @@ export default Component.extend({
         this._super(...arguments);
         this.resetTimeout();
     },
+    destroy() {
+        this._super(...arguments);
+
+        clearTimeout(this.get('dwellTimeout'));
+    },
     actions: {
         resetTimeout() {
             this.resetTimeout();
