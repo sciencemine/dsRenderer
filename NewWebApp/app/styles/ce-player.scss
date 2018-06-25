@@ -21,3 +21,11 @@
         border-radius: 0.25 * $grid-gap;
     }
 }
+
+.selected {
+    & > .asset-player {
+        $border: (0.5 * $grid-gap) solid blue;
+        border-top: $border;
+        border-bottom: $border;
+    }
+}

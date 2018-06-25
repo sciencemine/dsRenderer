@@ -11,6 +11,12 @@
 		"popoverDwell": 5,
 		"popoverShowDelay": 0.2
 	},
+	"tactile": {
+		"select": "d",
+		"previous": "a",
+		"cancel": "s",
+		"next": "h"
+	},
 	"stylesheet": "",
 	"style": {
 		"layout": {},

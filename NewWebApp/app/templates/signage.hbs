@@ -1,8 +1,6 @@
-{{#if renderCeSelect}}
-    {{ce-select dwell=model.config.idle data=ceSelectItems
-            onceselect=(action 'ceSelected')
-            ontimeout=(action 'ceSelectTimeout')}}
-{{/if}}
+{{ce-select dwell=model.config.idle
+        ces=ceSelectItems onceselect=(action 'ceSelected')
+        ontimeout=(action 'ceSelectTimeout') tactileMap=model.tactile}}
 {{!-- menu overlay should always render. want to make whole thing into
         a component at some point but not atm --}}
 <div class="menu-overlay">
@@ -11,8 +9,9 @@
 {{!-- the bg player should pause when the fg player is playing --}}
 {{#if renderFgPlayer}}
     {{fg-player ce=fgCe oncedone=(action 'ceDone') onpause=(action 'fgPause')
-        onplay=(action 'fgPlay')}}
+        onplay=(action 'fgPlay') tactileMap=model.tactile}}
 {{/if}}
 
 {{bg-player class=(if renderFgPlayer "hidden") playBg=playBg
-        playlist=bgPlayerItems onmousemove=(action 'wake')}}
+        playlist=bgPlayerItems onmousemove=(action 'wake')
+        tactileMap=model.tactile}}

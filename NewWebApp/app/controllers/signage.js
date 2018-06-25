@@ -1,14 +1,20 @@
 import Controller from '@ember/controller';
-import { A } from '@ember/array';
 import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 export default Controller.extend({
+    state: service(),
     // boolean for if the foreground should be playing
     renderFgPlayer: false,
     // boolean for if video select should be rendered
     renderCeSelect: false,
     // these are the primary items, i.e. the items the user can select
-    ceSelectItems: null,
+    ceSelectItems: computed('model.ce_set', function() {
+        let ceSet = this.get('model.ce_set');
+        let keys = Object.keys(ceSet);
+
+        return keys.map((key) => { return ceSet[key]; });
+    }).readOnly(),
     // these are the items that play in the background of the video select.
     // these should be the same as the bgPlayer itmes unless specified in the model
     // we need this because we want to re use the bg player for the video select list
@@ -21,18 +27,12 @@ export default Controller.extend({
         else {
             return ceSBgs;
         }
-    }),
+    }).readOnly(),
     // this is the ce to be rendered in the fg player
     fgCe: null,
     // this is for if te fg is playing the video or not. needed for knowing
     //   whether to play the bg videos or not
     playBg: true,
-    init() {
-        this._super(...arguments);
-        
-        // initialize the arrays
-        this.set('ceSelectItems', A());
-    },
     // think about states
     // idle, video select, video-playing
     // bg should play in idle and in video select IF there are no video select bgs
@@ -42,53 +42,48 @@ export default Controller.extend({
             this.setProperties({
                 fgCe: ce,
                 renderFgPlayer: true,
-                renderCeSelect: false,
                 playBg: false
             });
+
+            this.get('state').setState('playing');
         },
         // this handles the callback when the fg player is done playing
         ceDone(/* ce */) {
             this.setProperties({
                 fgCe: null,
                 renderFgPlayer: false,
-                renderCeSelect: true,
-                ceSelectItems: this.get('model.ce_set'),
                 playBg: true
             });
+            
+            this.get('state').setState('select');
         },
         // this handles updating the state when the ce select times out
         ceSelectTimeout() {
             this.setProperties({
                 fgCe: null,
                 renderFgPlayer: false,
-                renderCeSelect: false,
-                playBg: true,
-                ceSelectItems: A()
+                playBg: true
             });
+            this.get('state').setState('idle');
         },
         // this handles waking the system out of idle mode
         wake() {
-            if (!this.get('renderCeSelect') && !this.get('renderFgPlayer')) {
-                this.setProperties({
-                    renderCeSelect: true,
-                    ceSelectItems: this.get('model.ce_set')
-                });
+            let state = this.get('state');
+
+            // only wake if in the idle state
+            if (state.current === state.states.idle) {
+                state.setState('select');
             }
         },
         // this handles when a fg video is paused
         fgPause() {
-            this.setProperties({
-                renderCeSelect: true,
-                ceSelectItems: this.get('model.ce_set')
-            });
+            this.get('state').setState('select');
         },
         // this handles when a fg video is played
         fgPlay() {
-            this.setProperties({
-                renderCeSelect: false,
-                ceSelectItems: A(),
-                playBg: false
-            });
+            this.set('playBg', false);
+
+            this.get('state').setState('playing');
         }
     }
 });

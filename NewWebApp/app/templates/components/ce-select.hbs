@@ -1,8 +1,9 @@
-<div class="ce-select-list" onmousemove={{action 'resetTimeout'}}
+<div id="ce-select-list" class="ce-select-list" onmousemove={{action 'resetTimeout'}}
         onmouseclick={{action 'resetTimeout'}}>
-    {{#each-in data as |index value|}}
-        <div class="ce-select-item">
-            {{ce-player ce=value onselect=(action onceselect value)}}
+    {{#each ces as |value index|}}
+        <div id="ce-select-{{value.id}}" class="ce-select-item">
+            {{ce-player class=(if (test-eq currentSelected index) 'selected')
+                    ce=value onselect=(action onceselect value)}}
         </div>
-    {{/each-in}}
+    {{/each}}
 </div>
