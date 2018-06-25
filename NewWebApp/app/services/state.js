@@ -26,15 +26,13 @@ export default Service.extend({
     setState(arg) {
         let states = this.get('_states');
 
-        if (arg in states) {
+        if (arg in states && this.get('current') !== states[arg]) {
             this.set('_previousState', this.get('_currentState'));
             this.set('_currentState', states[arg]);
         }
-        else if(Object.values(states).includes(arg)) {
-            this.set('_previosState', this.get('_currentState'));
+        else if(Object.values(states).includes(arg) && this.get('current') != arg) {
+            this.set('_previousState', this.get('_currentState'));
             this.set('_currentState', arg);
         }
-
-        console.log(this.get('current'))
     }
 });

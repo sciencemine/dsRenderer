@@ -29,8 +29,6 @@ export default Component.extend(TactileControls, {
         let state = this.get('state');
 
         state.setState(state.previous);
-
-        this.get('ontimeout') ();
     },
     next() {
         this._resetTimeout();
@@ -72,9 +70,7 @@ export default Component.extend(TactileControls, {
     }),
     didInsertElement() {
         let state = this.get('state');
-
         this._updateHidden();
-
         this.updateFocus(state.current === state.states.select);
     },
     _resetTimeout() {
