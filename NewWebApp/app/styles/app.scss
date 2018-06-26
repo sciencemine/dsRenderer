@@ -5,6 +5,7 @@
 @import 'menu-bar';
 @import 'background-player';
 @import 'foreground-player';
+@import 'model-select';
 
 body {
     margin: 0px;
@@ -13,4 +14,8 @@ body {
 
 .hidden {
     display: none;
+}
+
+.muted {
+    color: 0.30 * #fff;
 }

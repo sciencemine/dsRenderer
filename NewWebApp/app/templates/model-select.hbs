@@ -1,1 +1,9 @@
 {{outlet}}
+<div class="model-select-container">
+    <h1>Model Select <small class="muted">select a model to display</small></h1>
+    {{#each model as |dsm key|}}
+        {{#link-to 'signage' dsm._id tagName="div" class="dsm-link"}}
+            <h3>{{dsm.title}} <small class="muted">{{dsm.description}}</small></h3>
+        {{/link-to}}
+    {{/each}}
+</div>

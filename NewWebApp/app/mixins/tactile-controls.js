@@ -32,19 +32,19 @@ export default Mixin.create({
                 return;
             }
 
-            switch(String.fromCharCode(e.keyCode).toLowerCase()) {
-                case tMap.select.toLowerCase():
-                    this.select(e);
-                    break;
-                case tMap.previous.toLowerCase():
-                    this.previous(e);
-                    break;
-                case tMap.cancel.toLowerCase():
-                    this.cancel(e);
-                    break;
-                case tMap.next.toLowerCase():
-                    this.next(e);
-                    break;
+            let char =  String.fromCharCode(e.keyCode).toLowerCase();
+
+            if (tMap.select.map((c)=>{ return c.toLowerCase() }).includes(char)) {
+                this.select(e);
+            }
+            else if (tMap.previous.map((c)=>{ return c.toLowerCase() }).includes(char)) {
+                this.previous(e);
+            }
+            else if (tMap.cancel.map((c)=>{ return c.toLowerCase() }).includes(char)) {
+                this.cancel(e);
+            }
+            else if (tMap.next.map((c)=>{ return c.toLowerCase() }).includes(char)) {
+                this.next(e);
             }
         }
     }

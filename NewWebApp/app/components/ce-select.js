@@ -58,9 +58,11 @@ export default Component.extend(TactileControls, {
 
         if (state.current === state.states.select) {
             this.$().removeClass('hidden');
+            this._resetTimeout();
         }
         else {
             this.$().addClass('hidden');
+            clearTimeout(this.get('dwellTimeout'));
         }
     },
     stateObserver: observer('state.current', function() {
@@ -85,11 +87,6 @@ export default Component.extend(TactileControls, {
     init() {
         this._super(...arguments);
         this._resetTimeout();
-    },
-    destroy() {
-        this._super(...arguments);
-
-        clearTimeout(this.get('dwellTimeout'));
     },
     actions: {
         resetTimeout() {

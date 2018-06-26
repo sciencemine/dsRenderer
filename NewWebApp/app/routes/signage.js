@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 import $ from 'jquery';
 
 export default Route.extend({
-    cdnAPI: 'http://csdept26.mtech.edu:30120',
+    cdnAPI: 'http://csdept26.mtech.edu:30123',
     // this is only necessary when testing from public files. the server will
     //   include the appropriate asset info when requesting a ce
     resolveAssets(dsm) {
@@ -63,28 +63,27 @@ export default Route.extend({
             this.transitionTo('model-select');
         });
     },
-    resolveCEs(dsm) {
+    resolveCEs(dsm, api = '') {
+        let terminal = '';
+
+        if (api === '') {
+            terminal = '.json';    
+        }
+        
         return Promise.all([
             Promise.all(Object.keys(dsm.ce_set).map((ce) => {
-                return $.getJSON(`/ces/${ce}.json`)
+
+                return $.getJSON(`${api}/ce/${ce}${terminal}`)
                 .then((data) => {
                     data.attributes = dsm.ce_set[ce].attributes;
                     data.relations = dsm.ce_set[ce].relations;
                     dsm.ce_set[ce] = data;
 
                 })
-                .catch(() => {
-                    return $.getJSON(`${this.cdnAPI}/ce/${ce}`)
-                    .then((data) => {
-                        data.attributes = dsm.ce_set[ce].attributes;
-                        data.relations = dsm.ce_set[ce].relations;
-                        dsm.ce_set[ce] = data;
-                    })
-                    .catch(console.error);
-                });
+                .catch(console.error);
             })),
             Promise.all(dsm.idle_backgrounds.map((ce, index, arr) => {
-                return $.getJSON(`/ces/${ce}.json`)
+                return $.getJSON(`${api}/ce/${ce}${terminal}`)
                 .then((data) => {
                     arr[index] = data;
                 })
@@ -99,12 +98,12 @@ export default Route.extend({
         });
     },
     model(params) {
-        return $.getJSON(`/${params.id}.json`)
+        return $.getJSON(`${this.cdnAPI}/dsm/${params.id}`)
         .then((data) => {
-            return this.resolveCEs(data).then(this.resolveAssets).catch(console.error);
+            return this.resolveCEs(data, this.cdnAPI);
         }).catch(() => {
-            return $.getJSON(`${this.cdnAPI}/dsm/${params.id}`).then((data) => {
-                return this.resolveCEs(data);
+            return $.getJSON(`/${params.id}.json`).then((data) => {
+                return this.resolveCEs(data).then(this.resolveAssets).catch(console.error);
             }).catch(() => {
                 this.transitionTo('model-select');
             });

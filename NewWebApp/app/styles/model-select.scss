@@ -1,0 +1,32 @@
+@import '_global-vars';
+
+.model-select-container {
+    width: 50%;
+    margin: 5vh auto;
+
+    background-color: $background-color * 1.15;
+    padding: 2 * $grid-gap;
+    border-radius: $grid-gap;
+
+    & > * {
+        border-bottom: grey 1px solid;
+    }
+
+    & > h1 {
+        text-align: center;
+    }
+    
+    & .dsm-link {
+        text-decoration: none;
+        color: inherit;
+        padding-right: $grid-gap;
+        padding-left: $grid-gap;
+        border-radius: 0.5 * $grid-gap;
+        transition: background-color 0.5s;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $background-color * 1.1;
+        }
+    }
+}
