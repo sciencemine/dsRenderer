@@ -9,7 +9,8 @@
 {{!-- the bg player should pause when the fg player is playing --}}
 {{#if renderFgPlayer}}
     {{fg-player ce=fgCe oncedone=(action 'ceDone') onpause=(action 'fgPause')
-        onplay=(action 'fgPlay') tactileMap=model.tactile}}
+        onplay=(action 'fgPlay') onassetstart=(action 'assetStart')
+        onassetdone=(action 'assetDone') tactileMap=model.tactile}}
 {{/if}}
 
 {{bg-player class=(if renderFgPlayer "hidden") playBg=playBg

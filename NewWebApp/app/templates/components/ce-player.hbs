@@ -7,23 +7,31 @@
         {{!-- Only care about options and callbacks on the primary asset --}}
         {{#asset-middleware
             asset=primaryAsset
-            onassetdone=(action 'assetDone' primaryAsset)
+            onassetdone=(action 'primaryAssetDone' primaryAsset)
             options=options
-            callbacks=callbacks
+            callbacks=(hash
+                onpause=(action onpause primaryAsset)
+                onselect=(action onselect primaryAsset)
+                onplay=(action onplay primaryAsset)
+            )
         }}
             {{!-- if the concurrent asset is a track put it inside --}}
             {{#each (get currentItem 1) as |asset key|}}
                 {{#if (is-track asset.type)}}
-                    {{asset-middleware asset=asset}}
+                    {{asset-middleware asset=asset
+                        onassetdone=(action 'onassetdone' asset)
+                    }}
                 {{/if}}
             {{/each}}
         {{/asset-middleware}}
-    {{/with}}
 
-    {{!-- otherwise put it outside --}}
-    {{#each (get currentItem 1) as |asset key|}}
-        {{#unless (is-track asset.type)}}
-            {{asset-middleware asset=asset}}
-        {{/unless}}
-    {{/each}}
+        {{!-- otherwise put it outside --}}
+        {{#each (get currentItem 1) as |asset key|}}
+            {{#unless (is-track asset.type)}}
+                {{asset-middleware asset=asset options=(hash
+                    playing=options.playing onassetdone=(action 'onassetdone' asset)
+                )}}
+            {{/unless}}
+        {{/each}}
+    {{/with}}
 {{/if}}

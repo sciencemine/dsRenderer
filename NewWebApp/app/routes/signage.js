@@ -76,7 +76,7 @@ export default Route.extend({
                 return $.getJSON(`${api}/ce/${ce}${terminal}`)
                 .then((data) => {
                     data.attributes = dsm.ce_set[ce].attributes;
-                    data.relations = dsm.ce_set[ce].relations;
+                    data.relationships = dsm.ce_set[ce].relationships;
                     dsm.ce_set[ce] = data;
 
                 })

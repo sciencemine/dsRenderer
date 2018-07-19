@@ -42,7 +42,7 @@ export default Component.extend(TactileControls, {
         let currentCE = this.get('currentSelected');
         let listContainer = this.$('#ce-select-list');
         let listContainerRight = listContainer.offset().left + listContainer.width();
-        let el = this.$(`#ce-select-${this.get('ces')[currentCE].id}`);
+        let el = this.$(`#ce-select-${this.get('ces')[currentCE]._id}`);
         let offsetLeft = el.offset().left;
         let currentScroll = listContainer.scrollLeft();
         

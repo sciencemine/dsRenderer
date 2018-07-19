@@ -19,3 +19,7 @@ body {
 .muted {
     color: 0.30 * #fff;
 }
+
+*:focus {
+    outline: none;
+}
