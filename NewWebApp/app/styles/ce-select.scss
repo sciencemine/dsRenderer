@@ -16,44 +16,4 @@
     pointer-events: none;
 
     z-index: 100;
-
-    // there can be n number of these
-    // can only assign cells if it is a direct child of a grid element
-    // the style of the list can change. for instance might want them to be
-    //   flex (netflix view) or sub grids (tile layout)
-    & > .ce-select-list {
-        background-color: 0.65 * $background-color;
-
-        // for now have each list take up a full row
-        grid-column-start: 2;
-        grid-column-end: span 8;
-
-        // describe where the rows should be
-        grid-row-start: 2;
-        grid-row-end: 3;
-
-        // rounded corners for my sanity
-        border-radius: 0.5 * $grid-gap;
-
-        // default behavior is displaying as flex
-        display: flex;
-        justify-content: flex-start;
-        overflow: auto;
-
-        pointer-events: auto;
-
-        box-shadow: (0.75 * $grid-gap) (0.75 * $grid-gap) $grid-gap black;
-
-        // these are the actual items. some basic styles need to be applied
-        //   but the large part of the styles should come from imported stylesheets
-        //   using the exposed hooks
-        & > .ce-select-item {
-            // default stuff for flex
-            flex: 0 0 auto;
-            margin: 0.25 * $grid-gap;
-            width: 15vw;
-
-            cursor: pointer;
-        }
-    }
 }

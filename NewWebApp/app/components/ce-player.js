@@ -17,16 +17,12 @@ export default Component.extend(PlaylistHandler, {
         this.assetStart();
     },
     updatePlaylist() {
-        this.setPlaylist(this.get('ce.playlist'));
+        this.setPlaylist(this.get('ce.playlist.queue'));
         this.setPlaylistIndex();
         this.set('attributeBindings', [ 'onselect:onclick' ])
 
         // if the first thing in the playlist is a teaser, adjust the playlist index
         if (!this.get('isTeaser')) {
-            if (!Array.isArray(this.get('currentItem'))) {
-                this.incrementPlaylist();
-            }
-
             this.assetStart();
         }
     },

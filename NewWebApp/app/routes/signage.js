@@ -72,7 +72,6 @@ export default Route.extend({
         
         return Promise.all([
             Promise.all(Object.keys(dsm.ce_set).map((ce) => {
-
                 return $.getJSON(`${api}/ce/${ce}${terminal}`)
                 .then((data) => {
                     data.attributes = dsm.ce_set[ce].attributes;
@@ -83,6 +82,13 @@ export default Route.extend({
                 .catch(console.error);
             })),
             Promise.all(dsm.idle_backgrounds.map((ce, index, arr) => {
+                return $.getJSON(`${api}/ce/${ce}${terminal}`)
+                .then((data) => {
+                    arr[index] = data;
+                })
+                .catch(console.error);
+            })),
+            Promise.all(dsm.video_select_backgrounds.map((ce, index, arr) => {
                 return $.getJSON(`${api}/ce/${ce}${terminal}`)
                 .then((data) => {
                     arr[index] = data;

@@ -1,8 +1,13 @@
 {{!-- ce player should only care about the order things are playled not how they are played --}}
 {{#if isTeaser}}
-    {{asset-middleware asset=currentItem}}
+    {{asset-middleware asset=ce.playlist.teaser}}
 {{else}}
-    {{#with (get currentItem 0) as |primaryAsset|}}
+    {{#with currentItem.primary as |primaryAsset|}}
+        {{#each currentItem.backgrounds as |background key|}}
+            {{asset-middleware asset=background.asset
+                onassetdone=(action 'onassetdone' background.asset)
+            }}
+        {{/each}}
         {{!-- note that we only care if the primary asset id done --}}
         {{!-- Only care about options and callbacks on the primary asset --}}
         {{#asset-middleware
@@ -16,22 +21,21 @@
             )
         }}
             {{!-- if the concurrent asset is a track put it inside --}}
-            {{#each (get currentItem 1) as |asset key|}}
-                {{#if (is-track asset.type)}}
-                    {{asset-middleware asset=asset
-                        onassetdone=(action 'onassetdone' asset)
-                    }}
-                {{/if}}
+            {{#each currentItem.tracks as |track key|}}
+                {{asset-middleware asset=track.asset
+                    onassetdone=(action 'onassetdone' track.asset)
+                }}
             {{/each}}
         {{/asset-middleware}}
 
         {{!-- otherwise put it outside --}}
-        {{#each (get currentItem 1) as |asset key|}}
-            {{#unless (is-track asset.type)}}
-                {{asset-middleware asset=asset options=(hash
-                    playing=options.playing onassetdone=(action 'onassetdone' asset)
-                )}}
-            {{/unless}}
+        {{#each currentItem.overlays as |overlay key|}}
+            {{asset-middleware asset=overlay.asset
+                onassetdone=(action 'onassetdone' overlay.asset)
+                options=(hash
+                    playing=options.playing
+                )
+            }}
         {{/each}}
     {{/with}}
 {{/if}}
