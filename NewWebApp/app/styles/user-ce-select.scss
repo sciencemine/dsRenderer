@@ -1,6 +1,6 @@
 // modifying this is like modifying select
 .ce-select-list {
-    background-color: 0.65 * #ccc
+    background-color: 0.65 * #ccc;
 
     // for now have each list take up a full row
     grid-column-start: 2;
@@ -11,7 +11,7 @@
     grid-row-end: 3;
 
     // rounded corners for my sanity
-    border-radius: 0.5 * 0.5vw
+    border-radius: 0.5 * 0.5vw;
 
     // default behavior is displaying as flex
     display: flex;
@@ -20,7 +20,7 @@
 
     pointer-events: auto;
 
-    box-shadow: (0.75 * 0.5vw (0.75 * 0.5vw 0.5vw black;
+    box-shadow: (0.75 * 0.5vw) (0.75 * 0.5vw) 0.5vw black;
 
     // these are the actual items. some basic styles need to be applied
     //   but the large part of the styles should come from imported stylesheets
@@ -28,7 +28,7 @@
     & > .ce-select-item {
         // default stuff for flex
         flex: 0 0 auto;
-        margin: 0.25 * 0.5vw
+        margin: 0.25 * 0.5vw;
         width: 15vw;
 
         cursor: pointer;

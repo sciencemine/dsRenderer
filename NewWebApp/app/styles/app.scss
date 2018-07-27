@@ -7,6 +7,12 @@
 @import 'foreground-player';
 @import 'model-select';
 
+
+@import 'user-ce-select';
+@import 'user-menu-bar';
+@import 'user-background-player';
+@import 'user-foreground-player';
+
 body {
     margin: 0px;
     background-color: $background-color;

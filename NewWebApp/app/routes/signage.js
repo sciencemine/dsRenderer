@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 import $ from 'jquery';
 
 export default Route.extend({
-    cdnAPI: 'http://csdept26.mtech.edu:30123',
+    cdnAPI: 'http://csdept26.mtech.edu:30120',
     // this is only necessary when testing from public files. the server will
     //   include the appropriate asset info when requesting a ce
     resolveAssets(dsm) {
@@ -69,7 +69,7 @@ export default Route.extend({
         if (api === '') {
             terminal = '.json';    
         }
-        
+        console.log(dsm)
         return Promise.all([
             Promise.all(Object.keys(dsm.ce_set).map((ce) => {
                 return $.getJSON(`${api}/ce/${ce}${terminal}`)

@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 import $ from 'jquery';
 
 export default Route.extend({
-    cdnAPI: 'http://csdept26.mtech.edu:30123',
+    cdnAPI: 'http://csdept26.mtech.edu:30120',
 
     model() {
         return $.getJSON(`${this.cdnAPI}/dsm`)

@@ -5,7 +5,7 @@ import { isPresent } from '@ember/utils';
 import $ from 'jquery';
 
 export default Controller.extend({
-    cdnAPI: 'http://csdept26.mtech.edu:30123',
+    cdnAPI: 'http://csdept26.mtech.edu:30120',
     state: service(),
     // boolean for if the foreground should be playing
     renderFgPlayer: false,
@@ -220,8 +220,14 @@ export default Controller.extend({
             }
         },
         assetStart(assetData) {
-            let primaryAssetEvent = this.makePathEvent(assetData[0]),
-                    pathEventsList = assetData[1].map(this.makePathEvent);
+            let primaryAssetEvent = this.makePathEvent(assetData.primary),
+                    pathEventsList = [];
+            function createAndPushEvent(queueObj) {
+                pathEventsList.push(this.makePathEvent(queueObj.asset))
+            }
+            assetData.backgrounds.forEach(createAndPushEvent);
+            assetData.tracks.forEach(createAndPushEvent);
+            assetData.overlays.forEach(createAndPushEvent);
             pathEventsList.push(primaryAssetEvent);
             this.set('curPathEvents', pathEventsList);
         },
