@@ -13,10 +13,18 @@ export default Component.extend(TactileControls, {
     select() {
         clearTimeout(this.get('dwellTimeout'));
 
+        if (this.get('playlist.length') === 0) {
+            return;
+        }
+
         this.get('onceselect') (this.get('ces')[this.get('currentSelected')]);
     },
     previous() {
         this._resetTimeout();
+
+        if (this.get('playlist.length') === 0) {
+            return;
+        }
 
         let ces = this.get('ces');
 
@@ -26,13 +34,21 @@ export default Component.extend(TactileControls, {
     cancel() {
         clearTimeout(this.get('dwellTimeout'));
 
+        if (this.get('playlist.length') === 0) {
+            return;
+        }
+
         let state = this.get('state');
 
         state.setState(state.previous);
     },
     next() {
         this._resetTimeout();
-        
+
+        if (this.get('playlist.length') === 0) {
+            return;
+        }
+
         let ces = this.get('ces');
 
         this.set('currentSelected', (this.get('currentSelected') + 1) % ces.length);
