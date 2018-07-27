@@ -69,7 +69,7 @@ export default Route.extend({
         if (api === '') {
             terminal = '.json';    
         }
-        console.log(dsm)
+        
         return Promise.all([
             Promise.all(Object.keys(dsm.ce_set).map((ce) => {
                 return $.getJSON(`${api}/ce/${ce}${terminal}`)

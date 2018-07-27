@@ -7,7 +7,9 @@ export default Route.extend({
     model() {
         return $.getJSON(`${this.cdnAPI}/dsm`)
         .then((data) => {
-            return data;
+            return Promise.all(data.map((dsm) => {
+                return $.getJSON(`${this.cdnAPI}/dsm/${dsm._id}`)
+            }));
         })
         .catch(console.error);
     }

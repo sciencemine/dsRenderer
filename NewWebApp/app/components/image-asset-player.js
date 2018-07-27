@@ -12,8 +12,10 @@ export default AssetPlayer.extend({
             attributeBindings: [ 'src' ]
         });
         
-        if (asset.options.duration) {
-            setTimeout(this.get('onassetdone'), asset.options.duration * 1000);
+        if ('options' in asset) {
+            if ('duration' in asset.options) {
+                setTimeout(this.get('onassetdone'), asset.options.duration * 1000);
+            }
         }
 
         this.bindOptions();
