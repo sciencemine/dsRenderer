@@ -13,7 +13,9 @@ export default Component.extend(TactileControls, {
     select() {
         clearTimeout(this.get('dwellTimeout'));
 
-        if (this.get('playlist.length') === 0) {
+        if (this.get('ces.length') === 0) {
+            let state = this.get('state');
+            state.setState(state.previous);
             return;
         }
 
@@ -22,7 +24,7 @@ export default Component.extend(TactileControls, {
     previous() {
         this._resetTimeout();
 
-        if (this.get('playlist.length') === 0) {
+        if (this.get('ces.length') === 0) {
             return;
         }
 
@@ -34,18 +36,13 @@ export default Component.extend(TactileControls, {
     cancel() {
         clearTimeout(this.get('dwellTimeout'));
 
-        if (this.get('playlist.length') === 0) {
-            return;
-        }
-
         let state = this.get('state');
-
         state.setState(state.previous);
     },
     next() {
         this._resetTimeout();
 
-        if (this.get('playlist.length') === 0) {
+        if (this.get('ces.length') === 0) {
             return;
         }
 
@@ -61,7 +58,7 @@ export default Component.extend(TactileControls, {
         let el = this.$(`#ce-select-${this.get('ces')[currentCE]._id}`);
         let offsetLeft = el.offset().left;
         let currentScroll = listContainer.scrollLeft();
-        
+
         if (offsetLeft + el.width() > listContainerRight) {
             listContainer.scrollLeft(currentScroll + offsetLeft - el.width());
         }
